@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  ffsync:
+    build: ffsync/
+    restart: always
+    volumes:
+      - ./data/ffsync:/data
+      - ./ffsync/syncserver.ini:/tmp/syncserver.ini
+
+  entry:
+    image: abiosoft/caddy:0.10.4
+    restart: always
+    privileged: true
+    links:
+      - ffsync
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./entry/Caddyfile:/etc/Caddyfile
+      - ./data/entry:/root/.caddy
+

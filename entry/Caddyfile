@@ -1,0 +1,5 @@
+sync.example.tld {
+    proxy / ffsync:5000 {
+        transparent
+    }
+}
